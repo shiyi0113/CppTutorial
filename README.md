@@ -6,6 +6,7 @@ Third Upload：Actor回到原位（委托）
 Fourth Upload：创建另一个Actor，可以弹起，使用第一个Actor触发第二个Actor弹起  
 Fifth Upload：弹起时播放爆炸声（接口）  
 Sixth Upload：自定义Pawn，WASD移动，摄像机转动视角  
+Seventh Upload：随机生成Actor、开关
 
 
 
