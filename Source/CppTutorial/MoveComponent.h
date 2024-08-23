@@ -16,6 +16,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 private:
+
 	FVector StartRelativeLocation;
 	UPROPERTY(EditAnywhere);
 	FVector MoveOffset;
@@ -25,4 +26,8 @@ private:
 	float CurDistance = 0.0f;      //µ±«∞“∆∂Øæ‡¿Î
 	FVector MoveOffsetNorm;
 	int MoveDirection = 1;
+	bool MoveEnable = false;
+	UFUNCTION(BlueprintCallable)
+	void EnableMovement(bool ShouldMove);
+
 };
