@@ -23,11 +23,12 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (MoveEnable) {
 		CurDistance += DeltaTime * speed * MoveDirection;
-		if (CurDistance >= MaxDistance || CurDistance <= 0.0f)
+		if (CurDistance >= MaxDistance || CurDistance <= 0.0f) {
 			MoveDirection *= -1;
+			OnEndpointReached.Broadcast(CurDistance >= MaxDistance);
+			CurDistance = FMath::Clamp(CurDistance, 0.0f, MaxDistance);
+		}
 	}
-	OnEndpointReached.Broadcast(CurDistance >= MaxDistance);
-	CurDistance = FMath::Clamp(CurDistance, 0.0f, MaxDistance);
 	SetRelativeLocation(StartRelativeLocation + MoveOffsetNorm * CurDistance);
 }
 
