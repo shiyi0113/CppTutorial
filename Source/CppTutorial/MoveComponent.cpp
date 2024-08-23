@@ -26,6 +26,8 @@ void UMoveComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		if (CurDistance >= MaxDistance || CurDistance <= 0.0f)
 			MoveDirection *= -1;
 	}
+	OnEndpointReached.Broadcast(CurDistance >= MaxDistance);
+	CurDistance = FMath::Clamp(CurDistance, 0.0f, MaxDistance);
 	SetRelativeLocation(StartRelativeLocation + MoveOffsetNorm * CurDistance);
 }
 
@@ -33,4 +35,15 @@ void UMoveComponent::EnableMovement(bool ShouldMove)
 {
 	MoveEnable = ShouldMove;
 	SetComponentTickEnabled(MoveEnable);
+}
+
+void UMoveComponent::ResetMovement()
+{
+	CurDistance = 0.0f;
+	SetRelativeLocation(StartRelativeLocation);
+}
+
+void UMoveComponent::SetMoveDirection(int Direction)
+{
+	MoveDirection = Direction >= 1 ? 1 : -1;
 }
